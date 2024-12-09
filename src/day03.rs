@@ -1,6 +1,12 @@
 use aoc_runner_derive::{aoc, aoc_generator};
 use nom::{
-    branch::alt, bytes::complete::tag, character::complete::anychar, combinator::{map, value}, multi::{many0, many_till}, sequence::{delimited, separated_pair, tuple}, IResult
+    branch::alt,
+    bytes::complete::tag,
+    character::complete::anychar,
+    combinator::{map, value},
+    multi::{many0, many_till},
+    sequence::{delimited, separated_pair},
+    IResult,
 };
 
 #[derive(Debug, PartialEq, Clone)]
@@ -121,9 +127,21 @@ fn part2(input: &[Entry]) -> i32 {
     input
         .iter()
         .map(|x| match x {
-            Entry::Mul { a, b } => if enabled {a * b} else {0},
-            Entry::Do => {enabled = true; 0},
-            Entry::DoNot => {enabled = false; 0},
+            Entry::Mul { a, b } => {
+                if enabled {
+                    a * b
+                } else {
+                    0
+                }
+            }
+            Entry::Do => {
+                enabled = true;
+                0
+            }
+            Entry::DoNot => {
+                enabled = false;
+                0
+            }
         })
         .sum()
 }
